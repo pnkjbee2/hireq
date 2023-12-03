@@ -70,13 +70,14 @@ const TableWithPagination = () => {
   };
 
   return (
-    <Container>
+    <div>
       <TextField
         label="Search Name"
+        size="small"
         variant="outlined"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-      />
+      /> <br/> <br/> <br/>
       <TableData
         users={filteredUsers.slice(
           (currentPage - 1) * itemsPerPage,
@@ -92,7 +93,7 @@ const TableWithPagination = () => {
         <Button onClick={handleNextPage}>Next Page</Button>
         <Button onClick={handleLastPage}>Last Page</Button>
       </Box>
-    </Container>
+    </div>
   );
 };
 

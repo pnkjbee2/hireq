@@ -11,9 +11,11 @@ import {
   Button,
   IconButton,
 } from '@mui/material';
-
+import EditCom from './Editcom';
 
 const Tables = ({users, deleteIcon, editIcon}) => {
+    const [showEdit, setShowEdit] = useState(false);
+  const [editingUser, setEditingUser] = useState(null);
     const handleDelete = (userId) => {
         setUser((prevUsers) => prevUsers.filter((u) => u.id !== userId));
       };
@@ -22,7 +24,15 @@ const [user, setUser] = useState([]);
 useEffect(() => {
     setUser(users);
   }, [users]);
+  const handleEdit = (user) => {
+    setEditingUser(user);
+    setShowEdit(true);
+  };
     return(
+        <div>
+      {showEdit ? (
+        <EditCom setShowEdit={setShowEdit}/>
+      ) : (
         <Container>
             <Table>
                 <TableHead>
@@ -45,7 +55,7 @@ useEffect(() => {
                                         <IconButton onClick={() => handleDelete(user.id)}>
                                         {deleteIcon}
                                         </IconButton>
-                                        <IconButton>
+                                        <IconButton onClick={() => handleEdit(user)}>
                                         {editIcon}
                                         </IconButton>
                                     </TableCell>
@@ -57,6 +67,8 @@ useEffect(() => {
                 </TableBody>
             </Table>
         </Container>
+        )}
+        </div>
     )
 }
 
